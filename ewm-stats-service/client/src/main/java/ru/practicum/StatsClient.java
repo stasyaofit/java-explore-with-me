@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
+import static ru.practicum.util.Constants.FORMAT;
+
 @Service
 public class StatsClient extends BaseClient {
-    private static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @Autowired
     public StatsClient(@Value("${ewm-server.url}") String serverUrl, RestTemplateBuilder builder) {

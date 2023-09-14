@@ -1,5 +1,6 @@
 package ru.practicum.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,14 +17,12 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@RestController
-public class StatsController {
-    private static final String FORMAT = "yyyy-MM-dd HH:mm:ss";
-    private final StatsService service;
+import static ru.practicum.util.Constants.DATE_TIME_FORMAT;
 
-    public StatsController(StatsService service) {
-        this.service = service;
-    }
+@RestController
+@RequiredArgsConstructor
+public class StatsController {
+    private final StatsService service;
 
     @PostMapping("/hit")
     @ResponseStatus(value = HttpStatus.CREATED)
@@ -32,8 +31,8 @@ public class StatsController {
     }
 
     @GetMapping("/stats")
-    public List<ViewStats> getStats(@RequestParam @DateTimeFormat(pattern = FORMAT) LocalDateTime start,
-                                    @RequestParam @DateTimeFormat(pattern = FORMAT) LocalDateTime end,
+    public List<ViewStats> getStats(@RequestParam @DateTimeFormat(pattern = DATE_TIME_FORMAT) LocalDateTime start,
+                                    @RequestParam @DateTimeFormat(pattern = DATE_TIME_FORMAT) LocalDateTime end,
                                     @RequestParam(defaultValue = "") List<String> uris,
                                     @RequestParam(defaultValue = "false") Boolean unique) {
         if (unique) {
