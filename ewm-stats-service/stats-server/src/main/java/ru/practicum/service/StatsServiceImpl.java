@@ -45,7 +45,7 @@ public class StatsServiceImpl implements StatsService {
 
     private void validateDateOrder(LocalDateTime start, LocalDateTime end) {
         if (end.isBefore(start)) {
-            throw new RuntimeException("Дата конца не может быть перед датой начала.");
+            throw new RuntimeException("Дата окончания не может быть перед датой начала.");
         }
     }
 }
