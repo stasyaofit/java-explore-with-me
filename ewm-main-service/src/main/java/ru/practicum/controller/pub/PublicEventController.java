@@ -28,7 +28,7 @@ public class PublicEventController {
         return service.getEventsByPublic(params, request);
     }
 
-    @GetMapping( "/{id}")
+    @GetMapping("/{id}")
     public EventFullDto getEvent(@PathVariable Long id, HttpServletRequest request) {
         log.info("Получен GET-запрос к эндпоинту: /events/{id} на получение события с id = {}.", id);
         return service.getEventByPublic(id, request);

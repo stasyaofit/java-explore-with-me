@@ -17,7 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping( "/admin/events")
+@RequestMapping("/admin/events")
 @RequiredArgsConstructor
 @Slf4j
 public class AdminEventController {

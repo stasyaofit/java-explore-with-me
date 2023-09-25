@@ -47,7 +47,7 @@ public class PrivateEventController {
         return service.getEventsByPrivate(userId, from, size);
     }
 
-    @GetMapping( "/{userId}/events/{eventId}")
+    @GetMapping("/{userId}/events/{eventId}")
     public EventFullDto getEvent(@PathVariable Long userId,
                                  @PathVariable Long eventId) {
         log.info("Получен GET-запрос к эндпоинту: /users/{userId}/events/{eventId} на получение события с id = {} " +
@@ -72,7 +72,7 @@ public class PrivateEventController {
         return service.getRequestsByPrivate(userId, eventId);
     }
 
-    @PatchMapping( "/{userId}/events/{eventId}/requests")
+    @PatchMapping("/{userId}/events/{eventId}/requests")
     public EventRequestStatusUpdateResult updateRequestStatus(@PathVariable Long userId,
                                                  @PathVariable Long eventId,
                                                  @RequestBody EventRequestStatusUpdateRequest updateRequest) {

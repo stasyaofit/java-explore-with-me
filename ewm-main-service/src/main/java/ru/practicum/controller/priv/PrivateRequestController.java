@@ -37,7 +37,7 @@ public class PrivateRequestController {
         return service.addParticipationRequest(userId, eventId);
     }
 
-    @PatchMapping( "/{userId}/requests/{requestId}/cancel")
+    @PatchMapping("/{userId}/requests/{requestId}/cancel")
     public ParticipationRequestDto cancelParticipationRequest(@PathVariable Long userId,
                                           @PathVariable Long requestId) {
         log.info("Получен PATCH-запрос к эндпоинту: /users/{userId}/requests/{requestId}/cancel на отклонение запроса на участие.");

@@ -38,7 +38,7 @@ public class EventDto implements Comparable<EventDto> {
     }
 
     public static final Comparator<EventDto> EVENT_DATE_COMPARATOR =
-            Comparator.comparing((EventDto eventDto) -> mapStringToLocalDateTime(eventDto.eventDate) )
+            Comparator.comparing((EventDto eventDto) -> mapStringToLocalDateTime(eventDto.eventDate))
                     .thenComparing(EventDto::getId);
 
     public static final Comparator<EventDto> VIEWS_COMPARATOR =
