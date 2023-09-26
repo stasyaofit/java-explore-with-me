@@ -75,7 +75,7 @@ public class ParticipationRequestServiceImpl implements ParticipationRequestServ
     private ParticipationRequest completeNewParticipationRequest(Long userId, Event event) {
         User user = checkUserExistAndGet(userId);
         boolean needConfirmation = event.getRequestModeration();
-        boolean hasParticipantsLimit = event.getParticipantLimit() != 0;
+        boolean hasParticipantsLimit = !event.getParticipantLimit().equals(0L);
         RequestStatus status = needConfirmation && hasParticipantsLimit ? RequestStatus.PENDING : RequestStatus.CONFIRMED;
         return ParticipationRequest.builder()
                 .requester(user)
