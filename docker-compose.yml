@@ -1,6 +1,6 @@
 version: '3.1'
 services:
-  stats-service:
+  stats-server:
     build: ewm-stats-service/stats-server
     image: stats-service
     ports:
@@ -29,7 +29,6 @@ services:
       - "8080:8080"
     depends_on:
       - ewm-db
-      - stats-service
     environment:
       - STATS_SERVER_URL=http://stats-server:9090
       - SPRING_DATASOURCE_URL=jdbc:postgresql://ewm-db:5432/ewm

@@ -1,5 +1,6 @@
 package ru.practicum.exception;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -64,6 +65,17 @@ public class ErrorHandler {
         return ApiError.builder()
                 .status(HttpStatus.FORBIDDEN)
                 .reason("Для запрошенной операции условия не выполнены.")
+                .message(e.getMessage())
+                .errorTimestamp(LocalDateTime.now())
+                .build();
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ApiError handleDataIntegrityViolationException(DataIntegrityViolationException e) {
+        return ApiError.builder()
+                .status(HttpStatus.CONFLICT)
+                .reason("Название категории уже существует.")
                 .message(e.getMessage())
                 .errorTimestamp(LocalDateTime.now())
                 .build();

@@ -24,7 +24,7 @@ import static ru.practicum.util.Constants.DATE_TIME_FORMATTER;
 public class StatsClient extends BaseClient {
 
     @Autowired
-    public StatsClient(@Value("${ewm-server.url:http://localhost:9090}") String serverUrl, RestTemplateBuilder builder) {
+    public StatsClient(@Value("${stats-server.url}") String serverUrl, RestTemplateBuilder builder) {
         super(
                 builder
                         .uriTemplateHandler(new DefaultUriBuilderFactory(serverUrl))
