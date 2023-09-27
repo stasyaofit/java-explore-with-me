@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.dto.compilation.CompilationDto;
 import ru.practicum.service.CompilationService;
 
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
 @RestController
@@ -21,8 +23,8 @@ public class PublicCompilationController {
 
     @GetMapping
     public List<CompilationDto> getAll(@RequestParam(required = false) Boolean pinned,
-                                       @RequestParam(defaultValue = "0") Integer from,
-                                       @RequestParam(defaultValue = "10") Integer size) {
+                                       @PositiveOrZero @RequestParam(defaultValue = "0")  Integer from,
+                                       @Positive @RequestParam(defaultValue = "10")  Integer size) {
         log.info("Получен GET-запрос к эндпоинту: /compilations на получение списка подборок событий.");
         return service.getAll(pinned, from, size);
     }

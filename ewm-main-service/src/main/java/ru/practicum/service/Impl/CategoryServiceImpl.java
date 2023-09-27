@@ -23,13 +23,13 @@ import java.util.List;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+@Transactional
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
     private final EventRepository eventRepository;
     private final CategoryMapper categoryMapper;
 
     @Override
-    @Transactional
     public CategoryDto addCategory(NewCategoryDto category) {
         Category newCategory = categoryMapper.mapToCategory(category);
         Category savedCategory = categoryRepository.save(newCategory);
@@ -37,7 +37,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    @Transactional
     public void deleteCategory(Long catId) {
         Category category = checkCategoryExistAndGet(catId);
         if (eventRepository.findByCategoryId(catId).isPresent()) {
@@ -48,7 +47,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    @Transactional
     public CategoryDto updateCategory(CategoryDto categoryDto, Long catId) {
         Category category = checkCategoryExistAndGet(catId);
         String newName = categoryDto.getName();
@@ -59,7 +57,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    @Transactional
     public List<CategoryDto> getAll(Integer from, Integer size) {
         Pageable pageable = PageRequest.of(from, size);
         Page<Category> catPage = categoryRepository.findAll(pageable);
@@ -67,7 +64,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    @Transactional
     public CategoryDto getCategoryById(Long catId) {
         Category category = checkCategoryExistAndGet(catId);
         return categoryMapper.mapToCategoryDto(category);

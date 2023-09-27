@@ -90,7 +90,6 @@ public class EventServiceImpl implements AdminEventService, PublicEventService, 
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<EventShortDto> getEventsByPrivate(Long userId, Integer from, Integer size) {
         checkUserExistAndGet(userId);
         int page = from / size;
@@ -101,7 +100,6 @@ public class EventServiceImpl implements AdminEventService, PublicEventService, 
     }
 
     @Override
-    @Transactional(readOnly = true)
     public EventFullDto getEventByPrivate(Long userId, Long eventId) {
         checkUserExistAndGet(userId);
         Event event = checkEventExistAndGet(eventId);
@@ -125,7 +123,6 @@ public class EventServiceImpl implements AdminEventService, PublicEventService, 
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<ParticipationRequestDto> getRequestsByPrivate(Long userId, Long eventId) {
         checkUserExistAndGet(userId);
         return requestRepo.findByEventId(eventId)
@@ -156,7 +153,6 @@ public class EventServiceImpl implements AdminEventService, PublicEventService, 
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<EventFullDto> getEventsByAdmin(EventFilterParamsDto paramsDto) {
         EventFilterParams params = convertInputParams(paramsDto);
         List<Event> events = eventRepo.adminEventsSearch(params);
@@ -193,7 +189,6 @@ public class EventServiceImpl implements AdminEventService, PublicEventService, 
     }
 
     @Override
-    @Transactional(readOnly = true)
     public EventFullDto getEventByPublic(Long eventId, HttpServletRequest request) {
         Event event = checkEventExistAndGet(eventId);
         boolean published = (event.getState() == EventState.PUBLISHED);
@@ -206,7 +201,6 @@ public class EventServiceImpl implements AdminEventService, PublicEventService, 
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<EventShortDto> getEventsByPublic(EventFilterParamsDto paramsDto, HttpServletRequest request) {
         EventFilterParams params = convertInputParams(paramsDto);
         List<Event> events = eventRepo.publicEventsSearch(params);

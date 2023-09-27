@@ -30,7 +30,6 @@ public class ParticipationRequestServiceImpl implements ParticipationRequestServ
 
 
     @Override
-    @Transactional(readOnly = true)
     public List<ParticipationRequestDto> getAll(Long userId) {
         checkUserExistAndGet(userId);
         List<ParticipationRequest> participationRequests = requestRepository.findByRequesterId(userId);

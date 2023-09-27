@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
     private final UserRepository repository;
     private final UserMapper mapper;
@@ -40,7 +41,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<UserDto> getAll(@Nullable List<Long> ids, Integer from, Integer size) {
         if (Objects.nonNull(ids)) {
             List<User> users = repository.findAllById(ids);

@@ -2,7 +2,6 @@ package ru.practicum.service.Impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,10 +22,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional(readOnly = true)
 public class CompilationServiceImpl implements CompilationService {
     private final CompilationRepository compilationRepo;
     private final EventRepository eventRepo;
@@ -73,19 +74,14 @@ public class CompilationServiceImpl implements CompilationService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<CompilationDto> getAll(Boolean pinned, Integer from, Integer size) {
-        Page<Compilation> compilations;
-        if (pinned == null) {
-            compilations = compilationRepo.findAll(PageRequest.of(from / size, size));
-        } else {
-            compilations = compilationRepo.findAllByPinned(pinned, PageRequest.of(from / size, size));
-        }
-        return compilations.map(compilationMapper::mapToCompilationDto).getContent();
+        return compilationRepo.findAllByPinned(pinned, PageRequest.of(from / size, size)).stream()
+                .map(compilationMapper::mapToCompilationDto)
+                .collect(Collectors.toList());
+
     }
 
     @Override
-    @Transactional(readOnly = true)
     public CompilationDto getCompilationById(Long compId) {
         Compilation compilation = checkCompilationExistAndGet(compId);
         return compilationMapper.mapToCompilationDto(compilation);

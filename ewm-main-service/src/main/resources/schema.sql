@@ -71,3 +71,21 @@ CREATE TABLE IF NOT EXISTS compilation_events
     event_id       BIGINT REFERENCES events (id) ON DELETE CASCADE,
     PRIMARY KEY (compilation_id, event_id)
 );
+
+create index categories_id_index
+    on categories (id);
+
+create index compilation_events_compilation_id_index
+    on compilation_events (compilation_id);
+
+create index compilations_id_index
+    on compilations (id);
+
+create index events_id_category_id_index
+    on events (id, category_id);
+
+create index locations_id_index
+    on locations (id);
+
+create index requests_id_event_id_index
+    on requests (id, event_id);
