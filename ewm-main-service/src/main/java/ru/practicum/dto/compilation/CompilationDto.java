@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import ru.practicum.dto.event.EventShortDto;
+import ru.practicum.dto.event.EventDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,5 +20,5 @@ public class CompilationDto {
     Long id;
     String title;
     Boolean pinned;
-    List<EventShortDto> events = new ArrayList<>();
+    List<EventDto> events = new ArrayList<>();
 }

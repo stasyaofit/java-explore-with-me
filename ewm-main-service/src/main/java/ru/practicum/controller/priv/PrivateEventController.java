@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import ru.practicum.dto.event.EventDto;
 import ru.practicum.dto.event.EventFullDto;
-import ru.practicum.dto.event.EventShortDto;
 import ru.practicum.dto.event.NewEventDto;
 import ru.practicum.dto.event.UpdateEventUserRequest;
 import ru.practicum.dto.request.EventRequestStatusUpdateRequest;
@@ -40,9 +40,9 @@ public class PrivateEventController {
     }
 
     @GetMapping("/{userId}/events")
-    public List<EventShortDto> getAll(@PathVariable Long userId,
-                                      @RequestParam(defaultValue = "0") Integer from,
-                                      @RequestParam(defaultValue = "10") Integer size) {
+    public List<EventDto> getAll(@PathVariable Long userId,
+                                 @RequestParam(defaultValue = "0") Integer from,
+                                 @RequestParam(defaultValue = "10") Integer size) {
         log.info("Получен GET-запрос к эндпоинту: /users/{userId}/events на получение списка событий от пользователя с id = {}.", userId);
         return service.getEventsByPrivate(userId, from, size);
     }

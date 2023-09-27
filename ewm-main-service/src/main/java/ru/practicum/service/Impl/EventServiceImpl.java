@@ -9,7 +9,6 @@ import ru.practicum.dto.event.EventDto;
 import ru.practicum.dto.event.EventFilterParams;
 import ru.practicum.dto.event.EventFilterParamsDto;
 import ru.practicum.dto.event.EventFullDto;
-import ru.practicum.dto.event.EventShortDto;
 import ru.practicum.dto.event.NewEventDto;
 import ru.practicum.dto.event.UpdateEventAdminRequest;
 import ru.practicum.dto.event.UpdateEventRequest;
@@ -90,13 +89,13 @@ public class EventServiceImpl implements AdminEventService, PublicEventService, 
     }
 
     @Override
-    public List<EventShortDto> getEventsByPrivate(Long userId, Integer from, Integer size) {
+    public List<EventDto> getEventsByPrivate(Long userId, Integer from, Integer size) {
         checkUserExistAndGet(userId);
         int page = from / size;
         List<Event> events = eventRepo.findByInitiatorId(userId, PageRequest.of(page, size));
         statsService.getViewsList(events);
         getConfirmedRequests(events);
-        return new ArrayList<>(eventMapper.mapToEventShortDtoListForEvents(events));
+        return new ArrayList<>(eventMapper.mapToEventDtoListForEvents(events));
     }
 
     @Override
@@ -201,13 +200,13 @@ public class EventServiceImpl implements AdminEventService, PublicEventService, 
     }
 
     @Override
-    public List<EventShortDto> getEventsByPublic(EventFilterParamsDto paramsDto, HttpServletRequest request) {
+    public List<EventDto> getEventsByPublic(EventFilterParamsDto paramsDto, HttpServletRequest request) {
         EventFilterParams params = convertInputParams(paramsDto);
         List<Event> events = eventRepo.publicEventsSearch(params);
         statsService.getViewsList(events);
         getConfirmedRequests(events);
         statsService.addHit(request);
-        return events.stream().map(eventMapper::mapToEventShortDto)
+        return events.stream().map(eventMapper::mapToEventDto)
                 .sorted(getComparator(params.getSort())).collect(Collectors.toList());
     }
 

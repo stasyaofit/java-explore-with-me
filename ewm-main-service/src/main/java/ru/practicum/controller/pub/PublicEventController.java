@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.practicum.dto.event.EventDto;
 import ru.practicum.dto.event.EventFilterParamsDto;
 import ru.practicum.dto.event.EventFullDto;
-import ru.practicum.dto.event.EventShortDto;
 import ru.practicum.service.PublicEventService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +23,7 @@ public class PublicEventController {
     private final PublicEventService service;
 
     @GetMapping
-    public List<EventShortDto> getAll(@Valid EventFilterParamsDto params, HttpServletRequest request) {
+    public List<EventDto> getAll(@Valid EventFilterParamsDto params, HttpServletRequest request) {
         log.info("Получен GET-запрос к эндпоинту: /events на получение списка всех событий.");
         return service.getEventsByPublic(params, request);
     }

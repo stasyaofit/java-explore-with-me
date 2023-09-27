@@ -1,11 +1,13 @@
 package ru.practicum.mapper;
 
+import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
+import ru.practicum.dto.event.EventDto;
 import ru.practicum.dto.event.EventFilterParams;
 import ru.practicum.dto.event.EventFilterParamsDto;
 import ru.practicum.dto.event.EventFullDto;
-import ru.practicum.dto.event.EventShortDto;
 import ru.practicum.dto.event.NewEventDto;
 import ru.practicum.model.Event;
 
@@ -38,11 +40,13 @@ public interface EventMapper {
     @Mapping(target = "eventDate", expression = "java(ru.practicum.util.DateTimeFormatter.mapLocalDateTimeToString(event.getEventDate()))")
     @Mapping(target = "initiator", source = "initiator")
     @Mapping(target = "views", ignore = true)
-    EventShortDto mapToEventShortDto(Event event);
+    @Named(value = "useMe")
+    EventDto mapToEventDto(Event event);
 
     @Mapping(target = "rangeStart", expression = "java(start)")
     @Mapping(target = "rangeEnd", expression = "java(end)")
     EventFilterParams mapToEventFilterParams(EventFilterParamsDto filterDto, LocalDateTime start, LocalDateTime end);
 
-    List<EventShortDto> mapToEventShortDtoListForEvents(List<Event> events);
+    @IterableMapping(qualifiedByName = "useMe")
+    List<EventDto> mapToEventDtoListForEvents(List<Event> events);
 }
