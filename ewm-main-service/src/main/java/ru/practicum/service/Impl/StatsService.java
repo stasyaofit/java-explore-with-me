@@ -1,0 +1,86 @@
+package ru.practicum.service.Impl;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import ru.practicum.StatsClient;
+import ru.practicum.ViewStatsDto;
+import ru.practicum.enums.EventState;
+import ru.practicum.exception.NotFoundException;
+import ru.practicum.model.Event;
+import ru.practicum.repository.EventRepository;
+
+import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Service
+@RequiredArgsConstructor
+public class StatsService {
+    private final StatsClient statsClient;
+    private final EventRepository repository;
+    private final ObjectMapper mapper;
+    @Value("${app.name}")
+    private String app;
+    private static final TypeReference<List<ViewStatsDto>> TYPE_REFERENCE_LIST = new TypeReference<>() {
+    };
+
+    public void addHit(HttpServletRequest request) {
+        String uri = request.getRequestURI();
+        String ip = request.getRemoteAddr();
+        LocalDateTime timestamp = LocalDateTime.now();
+        statsClient.addHit(app, uri, ip, timestamp);
+    }
+
+    public Long getViews(Long eventId) {
+        Event event = repository.findById(eventId)
+                .orElseThrow(() -> new NotFoundException("Событие с id = " + eventId + " не найдено."));
+        if (event.getState() != EventState.PUBLISHED) {
+            return 0L;
+        }
+        LocalDateTime start = event.getPublishedOn();
+        LocalDateTime end = LocalDateTime.now();
+        String uri = "/events/" + event.getId();
+        ResponseEntity<Object> response = statsClient.getStats(start, end, List.of(uri), true);
+        try {
+            String responseValue = mapper.writeValueAsString(response.getBody());
+            List<ViewStatsDto> viewStats = Arrays.asList(mapper.readValue(responseValue, new TypeReference<>() {
+            }));
+            return viewStats.isEmpty() ? 0 : viewStats.get(0).getHits();
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void getViewsList(List<Event> events) {
+        LocalDateTime start = events.get(0).getCreatedOn();
+        LocalDateTime end = LocalDateTime.now();
+        List<String> uris = new ArrayList<>();
+        String uri;
+        Map<String, Event> eventsUri = new HashMap<>();
+        for (Event event : events) {
+            if (start.isBefore(event.getCreatedOn())) {
+                start = event.getCreatedOn();
+            }
+            uri = "/events/" + event.getId();
+            uris.add(uri);
+            eventsUri.put(uri, event);
+            event.setViews(0L);
+        }
+        ResponseEntity<Object> response = statsClient.getStats(start, end, uris, true);
+        if (response.getStatusCode() == HttpStatus.OK) {
+            List<ViewStatsDto> stats = mapper.convertValue(response.getBody(), TYPE_REFERENCE_LIST);
+            stats.forEach((stat) ->
+                    eventsUri.get(stat.getUri()).setViews(stat.getHits()));
+        }
+    }
+}

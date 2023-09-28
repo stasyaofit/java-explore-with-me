@@ -30,19 +30,7 @@ public class BaseClient {
         return responseBuilder.build();
     }
 
-    protected ResponseEntity<Object> get(String path, @Nullable Map<String, Object> params) {
-        return makeAndSendRequest(HttpMethod.GET, path, params, null);
-    }
-
-    protected <T> ResponseEntity<Object> post(String path, @Nullable Map<String, Object> params, T body) {
-        return makeAndSendRequest(HttpMethod.POST, path, params, body);
-    }
-
-    protected <T> ResponseEntity<Object> post(String path, T body) {
-        return post(path, null, body);
-    }
-
-    private <T> ResponseEntity<Object> makeAndSendRequest(HttpMethod method, String path, @Nullable Map<String, Object> params, @Nullable T body) {
+    protected <T> ResponseEntity<Object> makeAndSendRequest(HttpMethod method, String path, @Nullable Map<String, Object> params, @Nullable T body) {
         HttpEntity<T> requestEntity = new HttpEntity<>(body, defaultHeaders());
         ResponseEntity<Object> statsServerResponse;
         try {

@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.EndpointHitDto;
+import ru.practicum.exception.BadRequestException;
 import ru.practicum.mapper.EndpointHitMapper;
 import ru.practicum.model.ViewStats;
 import ru.practicum.repository.StatsRepository;
@@ -45,7 +46,7 @@ public class StatsServiceImpl implements StatsService {
 
     private void validateDateOrder(LocalDateTime start, LocalDateTime end) {
         if (end.isBefore(start)) {
-            throw new RuntimeException("Дата окончания не может быть перед датой начала.");
+            throw new BadRequestException("Дата окончания не может быть перед датой начала.");
         }
     }
 }
