@@ -19,7 +19,6 @@ import ru.practicum.repository.EventRepository;
 import ru.practicum.repository.UserRepository;
 import ru.practicum.service.CommentService;
 
-import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -32,7 +31,6 @@ public class CommentServiceImpl implements CommentService {
     private final EventRepository eventRepository;
     private final CommentRepository commentsRepository;
     private final CommentMapper commentMapper;
-    private final EntityManager entityManager;
 
     @Override
     @Transactional
