@@ -20,8 +20,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     @Query("select c from Comment c " +
             "where c.author.id = ?1 and c.created > ?2 and c.created < ?3 " +
             "order by c.created")
-    List<Comment> findCommentsByAuthorAndTimeBetween
-            (Long userId, LocalDateTime start, LocalDateTime end, Pageable pageable);
+    List<Comment> findCommentsByAuthorAndTimeBetween(Long userId, LocalDateTime start, LocalDateTime end, Pageable pageable);
 
     List<Comment> findAllByAuthor_Id(Long userId, Pageable pageable);
 }
