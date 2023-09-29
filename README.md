@@ -26,7 +26,7 @@ https://github.com/stasyaofit/java-explore-with-me/blob/main/ewm-main-service-sp
 
 ### Registered users can leave comments on events.
 ### Viewing comments on an event is available to all users.
-### Comment authors and administrators can edit or delete comments.
+### Comment authors and administrators can edit or delete comments .
 # Postman test collections
 ### stats-server detached
 https://github.com/stasyaofit/java-explore-with-me/blob/feature_comments/postman/Tests%20for%20detatched%20stats%20service.json
