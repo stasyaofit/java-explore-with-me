@@ -1,7 +1,7 @@
 # java-explore-with-me
 Template repository for ExploreWithMe project.
-Ссылка на PR: https://github.com/stasyaofit/java-explore-with-me/pull/4
-# ExploreWithMe - это приложение, которое позволяет пользователям делиться информацией об интересных мероприятиях и находить компаньонов для участия в них.
+пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ PR: https://github.com/stasyaofit/java-explore-with-me/pull/4
+# ExploreWithMe - пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ.
 # Modules
 ## service: The main application module.
 ## stats: The statistics parent module.
@@ -19,7 +19,7 @@ https://github.com/stasyaofit/java-explore-with-me/blob/main/ewm-main-service-sp
 
 ### Clone the repository: git clone https://github.com/stasyaofit/java-explore-with-me.git
 ### Navigate to the project directory: cd java-explore-with-me
-### set up and configure each module as needed. 
+### Set up and configure each module as needed. 
 ### Build and run the application.
 # Additional feature
 ## Additional application functionality - comments:
