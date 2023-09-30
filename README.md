@@ -1,7 +1,7 @@
 # java-explore-with-me
 Template repository for ExploreWithMe project.
-������ �� PR: https://github.com/stasyaofit/java-explore-with-me/pull/4
-# ExploreWithMe - ��� ����������, ������� ��������� ������������� �������� ����������� �� ���������� ������������ � �������� ����������� ��� ������� � ���.
+Link PR: [https://github.com/stasyaofit/java-explore-with-me/pull/4]
+# ExploreWithMe - приложение, позволяющее пользователям делиться информацией об интересных событиях и находить попутчиков для участия в них.
 # Modules
 ## service: The main application module.
 ## stats: The statistics parent module.
