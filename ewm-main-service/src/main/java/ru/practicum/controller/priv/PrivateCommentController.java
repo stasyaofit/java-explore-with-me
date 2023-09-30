@@ -40,8 +40,8 @@ public class PrivateCommentController {
     public CommentDto addComment(@RequestBody @Valid NewCommentDto newCommentDto,
                           @PathVariable("userId") Long userId,
                           @PathVariable("eventId") Long eventId) {
-        log.info("Получен POST-запрос к эндпоинту: /users/{userId}/comments/{eventId} на добавление комментария " +
-                "к событию с id = {} от пользователя с id = {}.", eventId, userId);
+        log.info("РџРѕР»СѓС‡РµРЅ POST-Р·Р°РїСЂРѕСЃ Рє СЌРЅРґРїРѕРёРЅС‚Сѓ: /users/{userId}/comments/{eventId} РЅР° РґРѕР±Р°РІР»РµРЅРёРµ РєРѕРјРјРµРЅС‚Р°СЂРёСЏ " +
+                "Рє СЃРѕР±С‹С‚РёСЋ СЃ id = {} РѕС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ СЃ id = {}.", eventId, userId);
         return commentService.addComment(newCommentDto, userId, eventId);
     }
 
@@ -49,16 +49,16 @@ public class PrivateCommentController {
     public CommentDto updateByAuthorId(@RequestBody @Valid NewCommentDto newCommentDto,
                                        @PathVariable("userId") Long userId,
                                        @PathVariable("commentId") Long commentId) {
-        log.info("Получен PATCH-запрос к эндпоинту: /users/{userId}/comments/{commentId} на обновление комментария с id = {} " +
-                " от пользователя с id = {}.", commentId, userId);
+        log.info("РџРѕР»СѓС‡РµРЅ PATCH-Р·Р°РїСЂРѕСЃ Рє СЌРЅРґРїРѕРёРЅС‚Сѓ: /users/{userId}/comments/{commentId} РЅР° РѕР±РЅРѕРІР»РµРЅРёРµ РєРѕРјРјРµРЅС‚Р°СЂРёСЏ СЃ id = {} " +
+                " РѕС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ СЃ id = {}.", commentId, userId);
         return commentService.updateCommentByAuthor(newCommentDto, userId, commentId);
     }
 
     @GetMapping("/{commentId}")
     public CommentDto getByCommentId(@PathVariable("userId") Long userId,
                                      @PathVariable("commentId") Long commentId) {
-        log.info("Получен GET-запрос к эндпоинту: /users/{userId}/comments/{commentId} на получение комментария с id = {} " +
-                " от пользователя с id = {}.", commentId, userId);
+        log.info("РџРѕР»СѓС‡РµРЅ GET-Р·Р°РїСЂРѕСЃ Рє СЌРЅРґРїРѕРёРЅС‚Сѓ: /users/{userId}/comments/{commentId} РЅР° РїРѕР»СѓС‡РµРЅРёРµ РєРѕРјРјРµРЅС‚Р°СЂРёСЏ СЃ id = {} " +
+                " РѕС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ СЃ id = {}.", commentId, userId);
         return commentService.getByCommentId(userId, commentId);
     }
 
@@ -72,8 +72,8 @@ public class PrivateCommentController {
                                                @RequestParam(value = "end", required = false)
                                                @DateTimeFormat(pattern = DATE_TIME_FORMAT)
                                                LocalDateTime end) {
-        log.info("Получен GET-запрос к эндпоинту: /users/{userId}/comments на получение списка комментариев " +
-                "пользователем с id = {}.", userId);
+        log.info("РџРѕР»СѓС‡РµРЅ GET-Р·Р°РїСЂРѕСЃ Рє СЌРЅРґРїРѕРёРЅС‚Сѓ: /users/{userId}/comments РЅР° РїРѕР»СѓС‡РµРЅРёРµ СЃРїРёСЃРєР° РєРѕРјРјРµРЅС‚Р°СЂРёРµРІ " +
+                "РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј СЃ id = {}.", userId);
         return commentService.getAllByCreateTime(userId, start, end, from, size);
     }
 
@@ -81,8 +81,8 @@ public class PrivateCommentController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteByAuthorId(@PathVariable("userId") Long userId,
                                  @PathVariable("commentId") Long commentId) {
-        log.info("Получен DELETE-запрос к эндпоинту: /users/{userId}/comments/{commentId} на удаление комментария с id = {} " +
-                " от пользоаателя с id = {}.", commentId, userId);
+        log.info("РџРѕР»СѓС‡РµРЅ DELETE-Р·Р°РїСЂРѕСЃ Рє СЌРЅРґРїРѕРёРЅС‚Сѓ: /users/{userId}/comments/{commentId} РЅР° СѓРґР°Р»РµРЅРёРµ РєРѕРјРјРµРЅС‚Р°СЂРёСЏ СЃ id = {} " +
+                " РѕС‚ РїРѕР»СЊР·РѕР°Р°С‚РµР»СЏ СЃ id = {}.", commentId, userId);
         commentService.deleteCommentByAuthor(userId, commentId);
     }
 }

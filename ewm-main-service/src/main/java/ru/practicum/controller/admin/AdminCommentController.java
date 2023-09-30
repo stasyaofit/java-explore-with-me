@@ -25,32 +25,32 @@ public class AdminCommentController {
     public List<CommentDto> getCommentsByEventId(@RequestParam("eventId") Long eventId,
                                          @PositiveOrZero @RequestParam(value = "from", defaultValue = "0") Integer from,
                                          @Positive @RequestParam(value = "size", defaultValue = "10") Integer size) {
-        log.info("Получен GET-запрос к эндпоинту: /admin/comments/:eventId на получение списка комментариев события" +
-                "с id = {}  администратором.", eventId);
+        log.info("РџРѕР»СѓС‡РµРЅ GET-Р·Р°РїСЂРѕСЃ Рє СЌРЅРґРїРѕРёРЅС‚Сѓ: /admin/comments/:eventId РЅР° РїРѕР»СѓС‡РµРЅРёРµ СЃРїРёСЃРєР° РєРѕРјРјРµРЅС‚Р°СЂРёРµРІ СЃРѕР±С‹С‚РёСЏ" +
+                "СЃ id = {}  Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂРѕРј.", eventId);
 
         return commentService.getCommentsByEventIdByAdmin(eventId, from, size);
     }
 
     @GetMapping("/{commentId}")
     public CommentDto getByCommentId(@PathVariable("commentId") Long commentId) {
-        log.info("Получен GET-запрос к эндпоинту: /admin/comments//{commentId} на получение комментария с id = {} " +
-                " администратором.", commentId);
+        log.info("РџРѕР»СѓС‡РµРЅ GET-Р·Р°РїСЂРѕСЃ Рє СЌРЅРґРїРѕРёРЅС‚Сѓ: /admin/comments//{commentId} РЅР° РїРѕР»СѓС‡РµРЅРёРµ РєРѕРјРјРµРЅС‚Р°СЂРёСЏ СЃ id = {} " +
+                " Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂРѕРј.", commentId);
         return commentService.getByCommentIdByAdmin(commentId);
     }
 
     @PatchMapping("/{commentId}")
     public CommentDto updateCommentByAdmin(@RequestBody @Valid NewCommentDto newCommentDto,
                              @PathVariable("commentId") Long commentId) {
-        log.info("Получен PATCH-запрос к эндпоинту: /admin/comments//{commentId} на обновление комментария с id = {} " +
-                " администратором.", commentId);
+        log.info("РџРѕР»СѓС‡РµРЅ PATCH-Р·Р°РїСЂРѕСЃ Рє СЌРЅРґРїРѕРёРЅС‚Сѓ: /admin/comments//{commentId} РЅР° РѕР±РЅРѕРІР»РµРЅРёРµ РєРѕРјРјРµРЅС‚Р°СЂРёСЏ СЃ id = {} " +
+                " Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂРѕРј.", commentId);
         return commentService.updateCommentByAdmin(newCommentDto, commentId);
     }
 
     @DeleteMapping("/{commentId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCommentByAdmin(@PathVariable("commentId") Long commentId) {
-        log.info("Получен DELETE-запрос к эндпоинту: /admin/comments//{commentId} на удаление комментария с id = {} " +
-                " администратором.", commentId);
+        log.info("РџРѕР»СѓС‡РµРЅ DELETE-Р·Р°РїСЂРѕСЃ Рє СЌРЅРґРїРѕРёРЅС‚Сѓ: /admin/comments//{commentId} РЅР° СѓРґР°Р»РµРЅРёРµ РєРѕРјРјРµРЅС‚Р°СЂРёСЏ СЃ id = {} " +
+                " Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂРѕРј.", commentId);
         commentService.deleteCommentByAdmin(commentId);
     }
 }
